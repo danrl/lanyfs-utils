@@ -1,0 +1,33 @@
+.TH MKFS.LANYFS 8 "01-Aug-2012" "lanyfs utils 1.4"
+.SH NAME
+mkfs.lanyfs - create a lanyard filesystem (lanyfs)
+.SH SYNOPSIS
+.B mkfs.lanyfs
+[\-a \fIaddress-length\fP]
+[\-b \fIblocksize\fP]
+[\-l \fIlabel\fP]
+[\-v]
+\fIdevice\fP
+.SH DESCRIPTION
+.B mkfs.lanyfs
+creates a lanyfs on a disk or partition. Special file \fIdevice\fP points to the
+target device, e.g. \fI/dev/sdXY\fP. Further customization is provided through
+arguments \fIaddress-length\fP and \fIblocksize\fP.
+.SH OPTIONS
+.TP 8
+.B \-a \fIaddress length\fP
+Address length in bit, default is 32 bit.
+.TP 8
+.B \-b \fIblocksize\fP
+Blocksize in bytes, default is 4096 bytes.
+.TP 8
+.B \-l \fIlabel\fP
+Volume label for the filesystem, default is "LanyFS Storage".
+.TP 8
+.B \-v
+Verbose execution.
+.SH AVAILABILITY
+.B mkfs.lanyfs
+is part of the lanyfs utils package available from http://www.nonattached.net/lanyfs
+.SH AUTHOR
+Written by Dan Luedtke <mail@danrl.de>.
