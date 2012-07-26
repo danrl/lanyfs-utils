@@ -33,6 +33,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <byteswap.h>
 #include <stdarg.h>		/* va_*(), vprintf() */
 
 #include "lanyfs.h"
@@ -65,77 +66,49 @@ const char *progdate = "July 2012";
 /**
  * tole16() - Convert from CPU endianess to little endian.
  * @n:				unsigned integer to convert
- *
- * Insert the corresponding code into this empty function when porting! This
- * function works fine on little endian machines, e.g. x86_64 without any
- * changes. Only 16 bit unsigned integers are passed to this function, but
- * signedness should not really matter.
  */
 static inline uint16_t tole16 (uint16_t n)
 {
-	/*
-	 * this works fine on little endian machines,
-	 * remember to swap bytes before running this
-	 * code on other machines!
-	 */
+	int i = 1;
+	if (!*((unsigned char *) &i) == 0x01)
+		n =  bswap_16(n);
 	return n;
 }
 
 /**
  * fromle16() - Convert from little endian to CPU endianess.
  * @n:				unsigned integer to convert
- *
- * Insert the corresponding code into this empty function when porting! This
- * function works fine on little endian machines, e.g. x86_64 without any
- * changes. Only 16 bit unsigned integers are passed to this function, but
- * signedness should not really matter.
  */
 static inline uint16_t fromle16 (uint16_t n)
 {
-	/*
-	 * this works fine on little endian machines,
-	 * remember to swap bytes before running this
-	 * code on other machines!
-	 */
+	int i = 1;
+	if (!*((unsigned char *) &i) == 0x01)
+		n =  bswap_16(n);
 	return n;
 }
 
 /**
  * tole64() - Convert from CPU endianess to little endian.
  * @n:				unsigned integer to convert
- *
- * Insert the corresponding code into this empty function when porting! This
- * function works fine on little endian machines, e.g. x86_64 without any
- * changes. Only 64 bit unsigned integers are passed to this function, but
- * signedness should not really matter.
  */
 
 static inline uint64_t tole64 (uint64_t n)
 {
-	/*
-	 * this works fine on little endian machines,
-	 * remember to swap bytes before running this
-	 * code on other machines!
-	 */
+	int i = 1;
+	if (!*((unsigned char *) &i) == 0x01)
+		n =  bswap_64(n);
 	return n;
 }
 
 /**
  * fromle64() - Convert from little endian to CPU endianess.
  * @n:				unsigned integer to convert
- *
- * Insert the corresponding code into this empty function when porting! This
- * function works fine on little endian machines, e.g. x86_64 without any
- * changes. Only 64 bit unsigned integers are passed to this function, but
- * signedness should not really matter.
  */
 static inline uint64_t fromle64 (uint64_t n)
 {
-	/*
-	 * this works fine on little endian machines,
-	 * remember to swap bytes before running this
-	 * code on other machines!
-	 */
+	int i = 1;
+	if (!*((unsigned char *) &i) == 0x01)
+		n =  bswap_64(n);
 	return n;
 }
 
