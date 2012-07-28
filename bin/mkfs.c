@@ -599,7 +599,7 @@ int main (int argc, char *argv[])
 	printf(_("writing superblock\n"));
 	flush_block(&cfg, super);
 
-	/* TODO: write badblocks extender */
+	/* TODO: write badblocks chain */
 	super->b.sb.badblocks = 0;
 
 	/* create root directory */
@@ -612,7 +612,7 @@ int main (int argc, char *argv[])
 	super->b.sb.rootdir = root->addr;
 	free_null(root);
 
-	/* write first extender for free blocks */
+	/* write first chain block for free blocks */
 	chain = allocate_chain(&cfg, current++);
 	if (!chain) {
 		show_error("error allocating chain");
@@ -620,7 +620,7 @@ int main (int argc, char *argv[])
 	super->b.sb.freehead = chain->addr;
 	freeblocks++;
 
-	/* write more extenders for with blocks */
+	/* map remaining free space */
 	printf(_("mapping free space\n"));
 	printf(_("\r\t%lu/%lu"), current, cfg.dev_blocks);
 	fflush(stdout);
