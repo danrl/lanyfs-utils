@@ -23,13 +23,12 @@
 /**
  * DOC: Caution
  *
- * This programm works well on little endian architecture x86_64.
- * I have not tried with any other byte sex. However, function
- * protoypes for $your_architecture are already there. Just fill in
- * the correct code for big endian or mixed endian or whatever you
- * like (have) to use.
+ * This programm works well on big and little endian architectures.
+ * I have not tried with any other byte sex. However, functions
+ * are already there. Just fill in the correct code for mixed endian
+ * or whatever you like (have) to use.
  *
- * The prototypes are named tole64() and fromle64(). See their
+ * The functions are named tole64() and fromle64(). See their
  * documenation for further details.
  */
 
