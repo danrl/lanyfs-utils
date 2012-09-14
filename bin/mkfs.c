@@ -63,9 +63,16 @@
 #define off64_t off_t
 #define fseeko64 fseeko
 #define ftello64 ftello
+#elif defined __APPLE__
+#include <libkern/OSByteOrder.h>
+#define bswap_16(x) OSSwapInt16(x)
+#define bswap_64(x) OSSwapInt64(x)
+#define off64_t off_t
+#define fseeko64 fseeko
+#define ftello64 ftello
 #else
 #include <byteswap.h>
-#endif /* __FreeBSD__ */
+#endif
 
 #include "lanyfs.h"
 
