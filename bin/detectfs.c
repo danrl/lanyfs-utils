@@ -1,8 +1,8 @@
 /*
  * detectfs.c - Detect Lanyard Filesystem.
  *
- * Copyright Dan Luedtke <mail@danrl.de>
- * 2012. All rights reserved.
+ * Copyright 2012 Dan Luedtke <mail@danrl.de>
+ * Copyright 2012 Philippe Michaud-Boudreault <pitwuu@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
