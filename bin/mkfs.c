@@ -93,7 +93,7 @@
 
 /* constants */
 const char *progname = "mkfs.lanyfs";
-const char *progdate = "August 2012";
+const char *progdate = "December 2012";
 
 /* global variables */
 int v = 0;
