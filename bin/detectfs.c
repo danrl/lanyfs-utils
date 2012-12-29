@@ -18,8 +18,9 @@
  *    written permission.
  *
  * ALTERNATIVELY, this product may be distributed under the terms of
- * the GNU General Public License, in which case the provisions of the GPL
- * are required INSTEAD OF the above restrictions.
+ * the GNU General Public License Version 2 or any later version,
+ * in which case the provisions of the GPL are required INSTEAD OF the above
+ * restrictions.
  *
  * THIS SOFTWARE IS PROVIDED ''AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -82,7 +83,7 @@
 
 /* constants */
 const char *progname = "detectfs.lanyfs";
-const char *progdate = "August 2012";
+const char *progdate = "December 2012";
 
 /* -------------------------------------------------------------------------- */
 
@@ -221,11 +222,11 @@ int main (int argc, char *argv[])
 	printf(_("version: %u.%u\n"), sb->major, sb->minor);
 	printf(_("address length: %d bit\n"), sb->addrlen * 8);
 	printf(_("blocksize: %d bytes\n"), 1 << sb->blocksize);
-	printf(_("root dir: %lu\n"), sb->rootdir);
-	printf(_("total blocks: %lu\n"), sb->blocks);
-	printf(_("free head: %lu\n"), sb->freehead);
-	printf(_("free tail: %lu\n"), sb->freetail);
-	printf(_("free blocks: %lu\n"), sb->freeblocks);
+	printf(_("root dir: %"PRIu64"\n"), sb->rootdir);
+	printf(_("total blocks: %"PRIu64"\n"), sb->blocks);
+	printf(_("free head: %"PRIu64"\n"), sb->freehead);
+	printf(_("free tail: %"PRIu64"\n"), sb->freetail);
+	printf(_("free blocks: %"PRIu64"\n"), sb->freeblocks);
 	printf(_("created: %04u-%02u-%02uT%02u:%02u:%02u.%u%+03d:%02d\n"),
 		sb->created.year, sb->created.mon, sb->created.day,
 		sb->created.hour, sb->created.min, sb->created.sec,
@@ -241,7 +242,7 @@ int main (int argc, char *argv[])
 		sb->checked.hour, sb->checked.min, sb->checked.sec,
 		sb->checked.nsec, sb->checked.offset / 60,
 		abs(sb->checked.offset % 60));
-	printf(_("badblocks: %lu\n"), sb->badblocks);
+	printf(_("badblocks%"PRIu64"\n"), sb->badblocks);
 	printf(_("volume label: %s\n"), sb->label);
 
 	free_null(sb);

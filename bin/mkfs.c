@@ -18,8 +18,9 @@
  *    written permission.
  *
  * ALTERNATIVELY, this product may be distributed under the terms of
- * the GNU General Public License, in which case the provisions of the GPL
- * are required INSTEAD OF the above restrictions.
+ * the GNU General Public License Version 2 or any later version,
+ * in which case the provisions of the GPL are required INSTEAD OF the above
+ * restrictions.
  *
  * THIS SOFTWARE IS PROVIDED ''AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -360,14 +361,14 @@ static int flush_block (struct mklanyfs_cfg *cfg, struct mklanyfs_b *b)
 	off64_t pos;
 	if (!cfg || !b || !cfg->dev_fp)
 		return EXIT_FAILURE;
-	verbose("write block addr=%lu type=0x%x", b->addr, b->b.raw.type);
+	verbose("write block addr=%"PRIu64" type=0x%x", b->addr, b->b.raw.type);
 	pos = b->addr * (1 << cfg->blocksize);
 	if (fseeko(cfg->dev_fp, pos, SEEK_SET) != 0) {
-		show_error("seek error at block %lu", b->addr);
+		show_error("seek error at block %"PRIu64, b->addr);
 	}
 	b->b.raw.wrcnt = tole16(fromle16(b->b.raw.wrcnt) + 1);
 	if (fwrite(b->b.blob, 1 << cfg->blocksize, 1, cfg->dev_fp) != 1) {
-		show_error("write error at block %lu", b->addr);
+		show_error("write error at block %"PRIu64, b->addr);
 	}
 	return EXIT_SUCCESS;
 }
@@ -384,7 +385,7 @@ static struct mklanyfs_b *allocate_superblock (struct mklanyfs_cfg *cfg,
 	struct mklanyfs_b *b;
 	if (!cfg)
 		return NULL;
-	verbose("allocating superblock at addr=%lu", addr);
+	verbose("allocating superblock at addr=%"PRIu64, addr);
 	b = calloc(1, sizeof(*b));
 	if (b) {
 		b->addr = addr;
@@ -420,7 +421,7 @@ static struct mklanyfs_b *allocate_rootdir (struct mklanyfs_cfg *cfg,
 	struct mklanyfs_b *b;
 	if (!cfg)
 		return NULL;
-	verbose("allocating root directory at addr=%lu", addr);
+	verbose("allocating root directory at addr=%"PRIu64, addr);
 	b = calloc(1, sizeof(*b));
 	if (b) {
 		b->addr = addr;
@@ -450,7 +451,7 @@ static struct mklanyfs_b *allocate_chain (struct mklanyfs_cfg *cfg,
 	struct mklanyfs_b *b;
 	if (!cfg)
 		return NULL;
-	verbose("allocating chain block at addr=%lu", addr);
+	verbose("allocating chain block at addr=%"PRIu64, addr);
 	b = calloc(1, sizeof(*b));
 	if (b) {
 		b->addr = addr;
@@ -514,7 +515,7 @@ static int chain_get_free_slot (struct mklanyfs_cfg *cfg, struct mklanyfs_b *b)
 		if (!chain_get_slot(cfg, b, i))
 			return i;
 	}
-	verbose("chain block at addr=%lu no free slot", b->addr);
+	verbose("chain block at addr=%"PRIu64" no free slot", b->addr);
 	return -1;
 }
 
@@ -534,7 +535,7 @@ static int chain_set_slot (struct mklanyfs_cfg *cfg, struct mklanyfs_b *b,
 	slot = chain_get_free_slot(cfg, b);
 	if (slot < 0)
 		return -1;
-	verbose("chain block at addr=%lu slot=%d target=%lu", b->addr, slot, addr);
+	verbose("chain block at addr=%"PRIu64" slot=%d target=%"PRIu64, b->addr, slot, addr);
 	addr = tole64(addr);
 	memcpy(&b->b.chain.stream + (slot * cfg->addrlen), &addr, cfg->addrlen);
 	return 0;
@@ -654,7 +655,7 @@ int main (int argc, char *argv[])
 
 	/* map remaining free space */
 	printf(_("mapping free space\n"));
-	printf(_("\r\t%lu/%lu"), current, cfg.dev_blocks);
+	printf(_("\r\t%"PRIu64"/%"PRIu64), current, cfg.dev_blocks);
 	fflush(stdout);
 	while (current < cfg.dev_blocks) {
 		if (chain_get_free_slot(&cfg, chain) < 0) {
@@ -665,7 +666,7 @@ int main (int argc, char *argv[])
 			if (!chain)
 				show_error("error allocating chain");
 			freeblocks++;
-			printf(_("\r\t%lu/%lu"), current, cfg.dev_blocks);
+			printf(_("\r\t%"PRIu64"/%"PRIu64), current, cfg.dev_blocks);
 			if (v)
 				printf("\n");
 			continue;
@@ -673,9 +674,9 @@ int main (int argc, char *argv[])
 		chain_set_slot(&cfg, chain, current++);
 		freeblocks++;
 		if (v)
-			printf(_("\r\t%lu/%lu\n"), current, cfg.dev_blocks);
+			printf(_("\r\t%"PRIu64"/%"PRIu64"\n"), current, cfg.dev_blocks);
 	}
-	printf(_("\r\t%lu/%lu\n"), current, cfg.dev_blocks);
+	printf(_("\r\t%"PRIu64"/%"PRIu64"\n"), current, cfg.dev_blocks);
 	super->b.sb.freetail = chain->addr;
 	super->b.sb.freeblocks = freeblocks;
 	flush_block(&cfg, chain);

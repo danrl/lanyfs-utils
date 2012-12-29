@@ -1,8 +1,7 @@
 /*
  * lanyfs.h - Userspace Headers for Lanyard Filesystem.
  *
- * Copyright Dan Luedtke <mail@danrl.de>
- * 2012. All rights reserved.
+ * Copyright 2012 Dan Luedtke <mail@danrl.de>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -18,8 +17,9 @@
  *    written permission.
  *
  * ALTERNATIVELY, this product may be distributed under the terms of
- * the GNU General Public License, in which case the provisions of the GPL
- * are required INSTEAD OF the above restrictions.
+ * the GNU General Public License Version 2 or any later version,
+ * in which case the provisions of the GPL are required INSTEAD OF the above
+ * restrictions.
  *
  * THIS SOFTWARE IS PROVIDED ''AS IS'' AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -34,7 +34,6 @@
  * USE OF THIS SOFTWARE, EVEN IF NOT ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  */
-
 /* -------------------------------------------------------------------------- */
 
 #ifndef __LANYFS_H_
