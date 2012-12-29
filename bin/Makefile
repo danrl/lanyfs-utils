@@ -1,6 +1,6 @@
 CC	= gcc
 CFLAGS	+= -std=gnu99 -Wall -pedantic -g -D_LARGEFILE64_SOURCE=1
-LDFLAGS	+= -lrt
+LDFLAGS	+= 
 
 all: mkfs.lanyfs detectfs.lanyfs
 
