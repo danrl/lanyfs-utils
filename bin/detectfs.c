@@ -242,7 +242,7 @@ int main (int argc, char *argv[])
 		sb->checked.hour, sb->checked.min, sb->checked.sec,
 		sb->checked.nsec, sb->checked.offset / 60,
 		abs(sb->checked.offset % 60));
-	printf(_("badblocks%"PRIu64"\n"), sb->badblocks);
+	printf(_("badblocks: %"PRIu64"\n"), sb->badblocks);
 	printf(_("volume label: %s\n"), sb->label);
 
 	free_null(sb);
